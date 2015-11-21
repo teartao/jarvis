@@ -16,15 +16,20 @@ import javax.servlet.http.HttpServletResponse;
 public class ExceptionHandler extends AbstractHandlerExceptionResolver {
     private static Logger log = LoggerFactory.getLogger(ExceptionHandler.class);
 
-    //Êý¾Ý¿âÏà¹ØÒì³£
+    //æ•°æ®åº“ç›¸å…³å¼‚å¸¸
     private String foreignErr = "a foreign key constraint fails";
-    private String foreignMsg = "¸Ã×ÊÔ´±»ÆäËüÒµÎñÕ¼ÓÃ,ÎÞ·¨É¾³ý";
+    private String foreignMsg = "è¯¥èµ„æºè¢«å…¶å®ƒä¸šåŠ¡å ç”¨,æ— æ³•åˆ é™¤";
+    private MappingToJsonView viewName;
+
+    public void setViewName(MappingToJsonView viewName) {
+        this.viewName = viewName;
+    }
 
     @Override
     protected ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse response,
                                               Object handler, Exception e) {
         log.error("Catch Exception: ", e);
-        ModelAndView mav = new ModelAndView("jsonView");
+        ModelAndView mav = new ModelAndView(viewName);
         mav.addObject(ResponseStatus.SUCCESS, false);
         String msg = e.getLocalizedMessage();
         if (msg.indexOf(foreignErr) > 0) {

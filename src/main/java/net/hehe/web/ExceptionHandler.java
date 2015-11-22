@@ -1,9 +1,12 @@
 package net.hehe.web;
 
+import static org.springframework.util.Assert.notNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver;
+import org.springframework.beans.factory.InitializingBean;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  * date: 2015/11/21.
  * description:
  */
-public class ExceptionHandler extends AbstractHandlerExceptionResolver {
-    private static Logger log = LoggerFactory.getLogger(ExceptionHandler.class);
+public class ExceptionHandler extends AbstractHandlerExceptionResolver implements InitializingBean {
+    protected Logger log = LoggerFactory.getLogger(this.getClass());
 
     //数据库相关异常
     private String foreignErr = "a foreign key constraint fails";
@@ -37,5 +40,14 @@ public class ExceptionHandler extends AbstractHandlerExceptionResolver {
         }
         mav.addObject(ResponseStatus.ERROR_MSG, msg);
         return mav;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        checkHandlerConfig();
+    }
+
+    protected void checkHandlerConfig() {
+        notNull(this.viewName, "Property 'viewName' is required");
     }
 }

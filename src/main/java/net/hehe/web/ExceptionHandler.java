@@ -38,7 +38,7 @@ public class ExceptionHandler extends AbstractHandlerExceptionResolver implement
         if (msg.indexOf(foreignErr) > 0) {
             msg = foreignMsg;
         }
-        mav.addObject(ResponseStatus.ERROR_MSG, msg);
+        mav.addObject(ResponseStatus.ERROR, msg);
         return mav;
     }
 

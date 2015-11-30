@@ -112,8 +112,8 @@ public class JsonMessageConverter extends AbstractHttpMessageConverter<Object> {
             throws IOException, HttpMessageNotWritableException {
         JSONObject newJson;
 
+        //                    todo how to wrap the data with a proper form/format
         if (o != null && JSONObject.class.isInstance(o) && ((JSONObject) o).containsKey(ResponseStatus.SUCCESS)) {
-            //standard full-scale response body
             newJson = (JSONObject) o;
         } else {
             newJson = new JSONObject();
@@ -121,17 +121,18 @@ public class JsonMessageConverter extends AbstractHttpMessageConverter<Object> {
 
             if (o != null) {
                 if (JSONObject.class.isInstance(o)) {
-                    newJson.put(ResponseStatus.DATA, o);
+//                    newJson.put(ResponseStatus.DATA, o);
+                    newJson.putAll((JSONObject) o);
                 } else {
                     newJson.put(ResponseStatus.DATA, JSON.toJSON(o));
                 }
             }
         }
 
-        String jsonString = JSON.toJSONString(newJson, serializerFeature);
-        log.debug("response:" + jsonString);
+        String response = JSON.toJSONString(newJson, serializerFeature);
+        log.debug("response:" + response);
         OutputStream out = outputMessage.getBody();
-        out.write(jsonString.getBytes(DEFAULT_CHARSET));
+        out.write(response.getBytes(DEFAULT_CHARSET));
         out.flush();
     }
 

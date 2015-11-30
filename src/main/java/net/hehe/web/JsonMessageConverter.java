@@ -112,7 +112,6 @@ public class JsonMessageConverter extends AbstractHttpMessageConverter<Object> {
             throws IOException, HttpMessageNotWritableException {
         JSONObject newJson;
 
-        //                    todo how to wrap the data with a proper form/format
         if (o != null && JSONObject.class.isInstance(o) && ((JSONObject) o).containsKey(ResponseStatus.SUCCESS)) {
             newJson = (JSONObject) o;
         } else {
@@ -121,8 +120,7 @@ public class JsonMessageConverter extends AbstractHttpMessageConverter<Object> {
 
             if (o != null) {
                 if (JSONObject.class.isInstance(o)) {
-//                    newJson.put(ResponseStatus.DATA, o);
-                    newJson.putAll((JSONObject) o);
+                    newJson.put(ResponseStatus.DATA, o);
                 } else {
                     newJson.put(ResponseStatus.DATA, JSON.toJSON(o));
                 }

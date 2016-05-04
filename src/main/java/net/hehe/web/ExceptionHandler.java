@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * date: 2015/11/21.
  * description:
  */
-public class ExceptionHandler extends AbstractHandlerExceptionResolver implements InitializingBean {
+public class ExceptionHandler extends AbstractHandlerExceptionResolver {
     protected Logger log = LoggerFactory.getLogger(this.getClass());
 
     //数据库相关异常
@@ -40,14 +40,5 @@ public class ExceptionHandler extends AbstractHandlerExceptionResolver implement
         }
         mav.addObject(ResponseStatus.ERROR, msg);
         return mav;
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        checkHandlerConfig();
-    }
-
-    protected void checkHandlerConfig() {
-        notNull(this.viewName, "Property 'viewName' is required");
     }
 }

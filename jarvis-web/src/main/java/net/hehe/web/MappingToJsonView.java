@@ -31,10 +31,7 @@ public class MappingToJsonView extends AbstractView {
                                            HttpServletResponse response) throws Exception {
         PropertyFilter filter = new PropertyFilter() {
             public boolean apply(Object source, String name, Object value) {
-                if (name.indexOf("org.springframework.validation.BindingResult") == 0) {
-                    return false;
-                }
-                return true;
+                return name.indexOf("org.springframework.validation.BindingResult") != 0;
             }
         };
         SerializeWriter out = new SerializeWriter();

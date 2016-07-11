@@ -104,8 +104,8 @@ public class JsonMessageConverter extends AbstractHttpMessageConverter<Object> {
      *
      * @param o
      * @param outputMessage
-     * @throws java.io.IOException
-     * @throws org.springframework.http.converter.HttpMessageNotWritableException
+     * @throws IOException
+     * @throws HttpMessageNotWritableException
      */
     @Override
     protected void writeInternal(Object o, HttpOutputMessage outputMessage)

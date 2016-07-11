@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * author: TaoLei
  * date: 2015/11/21.
- * description:
+ * description: 异常接收处理类
  */
 public class ExceptionHandler extends AbstractHandlerExceptionResolver {
     protected Logger log = LoggerFactory.getLogger(this.getClass());

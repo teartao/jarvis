@@ -5,16 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.hehe</groupId>
-    <artifactId>jarvis</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>jarvis-web</artifactId>
 
     <properties>
         <springframework.version>4.1.1.RELEASE</springframework.version>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -67,35 +65,21 @@
             <version>1.1.39</version>
         </dependency>
 
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>3.1</version>
-        </dependency>
-
-        <!--data source-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.29</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.0.9</version>
-        </dependency>
-
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>release_user</id>
+            <name>user of release</name>
+            <url>http://192.168.0.120:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>release_user</id>
+            <name>user of snapshot</name>
+            <url>http://192.168.0.120:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
-        <finalName>jarvis</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -104,7 +88,7 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
-            <!--构建时运行测试-->
+
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
@@ -113,16 +97,14 @@
                     </includes>
                 </configuration>
             </plugin>
-            <!--打包源码-->
+
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.1</version>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
+                <version>2.4</version>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <id>attach-sources</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -131,4 +113,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

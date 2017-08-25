@@ -90,11 +90,18 @@ public class JsonMessageConverter extends AbstractHttpMessageConverter<Object> {
             }
         }
 
+        JSONObject jsonParam = new JSONObject();
         if (raw.startsWith("[")) {
-
             return JSON.parseArray(raw, clazz);
         } else {
-            return JSON.parseObject(raw, clazz, feature);
+            String[] paramArr = raw.split("&");
+            for (int i = 0; i < paramArr.length; i++) {
+                JSONObject param = new JSONObject();
+                String[] paramKV = paramArr[i].split("=");
+                param.put(paramKV[0], paramKV[1]);
+                jsonParam.putAll(param);
+            }
+            return JSON.parseObject(jsonParam.toString(), clazz, feature);
         }
     }
 

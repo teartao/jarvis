@@ -102,32 +102,15 @@ public class JsonMessageConverter extends AbstractHttpMessageConverter<Object> {
      * Controller的方法如果直接返回JSONObject，会经过此方法转换。
      * 如果JSONObject中只有业务数据，则包装结果数据。
      *
-     * @param o
+     * @param data
      * @param outputMessage
      * @throws IOException
      * @throws HttpMessageNotWritableException
      */
     @Override
-    protected void writeInternal(Object o, HttpOutputMessage outputMessage)
+    protected void writeInternal(Object data, HttpOutputMessage outputMessage)
             throws IOException, HttpMessageNotWritableException {
-        JSONObject newJson;
-
-        if (o != null && JSONObject.class.isInstance(o) && ((JSONObject) o).containsKey(ResponseStatus.SUCCESS)) {
-            newJson = (JSONObject) o;
-        } else {
-            newJson = new JSONObject();
-            newJson.put(ResponseStatus.SUCCESS, true);
-
-            if (o != null) {
-                if (JSONObject.class.isInstance(o)) {
-                    newJson.put(ResponseStatus.DATA, o);
-                } else {
-                    newJson.put(ResponseStatus.DATA, JSON.toJSON(o));
-                }
-            }
-        }
-
-        String response = JSON.toJSONString(newJson, serializerFeature);
+        String response = JSON.toJSONString(data, serializerFeature);
         log.debug("response:" + response);
         OutputStream out = outputMessage.getBody();
         out.write(response.getBytes(DEFAULT_CHARSET));
@@ -148,7 +131,6 @@ public class JsonMessageConverter extends AbstractHttpMessageConverter<Object> {
         if (raw == null) {
             throw new RuntimeException("http message is empty");
         }
-//        raw = URLDecoder.decode(raw, DEFAULT_CHARSET.name());
         log.debug("request:" + raw);
         return raw;
     }

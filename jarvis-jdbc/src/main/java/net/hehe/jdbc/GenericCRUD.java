@@ -6,24 +6,24 @@ import java.util.Map;
 /**
  * Created by TaoLei on 2016/6/21.
  */
-public interface GenericCRUD<E> {
-    <T> T findOne(String id, Class<T> clazz);
+public interface GenericCRUD<T> {
+    T findOne(String id, Class<T> clazz);
 
-    <T> T find(Map param, Class<T> clazz);
+    T find(Map param, Class<T> clazz);
 
-    <T> T find(String sql, Map<String, String> param);
+    T find(String sql, Map<String, String> param);
 
-    <T> T find(String sql, Map<String, String> param, Class<T> clazz);
+    T find(String sql, Map param, Class<T> clazz);
 
-    <T> List<T> findAll(Map<String, String> param);
+    List<T> findAll(Map<String, String> param);
 
-    String update(E entity);
+    int update(T entity);
 
-    String update(E entity, Map<String, String> param);
+    int update(T entity, Map<String, String> param);
 
-    String insert(E entity);
+    int insert(T entity);
 
-    void delete(String id);
+    int delete(String id);
 
-    void delete(E entity);
+    int delete(Object entity);
 }

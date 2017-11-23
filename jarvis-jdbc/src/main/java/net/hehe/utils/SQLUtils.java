@@ -13,12 +13,12 @@ import java.util.List;
  */
 public class SQLUtils {
 
-    public static final String AND_TAG="AND";
-    public static final String COMMA_TAG=",";
+    public static final String AND_TAG = " AND ";
+    public static final String COMMA_TAG = ",";
     private static Logger logger = LoggerFactory.getLogger(SQLUtils.class);
 
     private static String cutDataFromList(List<String> list) {
-        return String.valueOf(list).replace("[", "").replace("]", "");
+        return String.valueOf(list).replace("[", "").replace("]", "").replace(" ","");
     }
 
     public static String getColumnsName(Object entity) throws IllegalAccessException {
@@ -48,9 +48,9 @@ public class SQLUtils {
         if (columnsNameArr.length == columnsValueArr.length) {
             for (int i = 0; i < columnsNameArr.length; i++) {
                 if (keyValueStr.length() > 0) {
-                    keyValueStr.append(" ").append(splitTag).append(" ");
+                    keyValueStr.append(splitTag);
                 }
-                keyValueStr.append(columnsNameArr[i]).append("=").append("'").append(columnsValueArr[i]).append("'");
+                keyValueStr.append("`").append(columnsNameArr[i]).append("`='").append(columnsValueArr[i]).append("'");
             }
 
             return keyValueStr.toString();

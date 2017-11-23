@@ -54,12 +54,12 @@ public abstract class MySQLBuilder<E> implements SQLHelper {
     public String getSelectSQL(Object entity) {
         StringBuilder sql = new StringBuilder();
         try {
-            String paramStr = SQLUtils.getKeyValue(entity, SQLUtils.AND_TAG);
+            String paramStr = SQLUtils.getKeyValue(entity, SQLUtils.COMMA_TAG);
             sql.append("SELECT * FROM ").append(getTableName()).append(" WHERE ").append(paramStr);
         } catch (IllegalAccessException e) {
             throw new SQLErrorException("can not access " + entity.getClass() + " ,because of method is private !");
         }
 
-        return null;
+        return sql.toString();
     }
 }

@@ -17,6 +17,7 @@
         <module>jarvis-core</module>
         <module>jarvis-jdbc</module>
         <module>jarvis-web</module>
+        <module>jarvis-utils</module>
     </modules>
 
     <dependencies>

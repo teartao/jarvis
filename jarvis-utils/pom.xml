@@ -11,6 +11,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>jarvis-core</artifactId>
+    <artifactId>jarvis-utils</artifactId>
+    <packaging>jar</packaging>
 
 </project>

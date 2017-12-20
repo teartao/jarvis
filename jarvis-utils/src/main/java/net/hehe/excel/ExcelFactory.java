@@ -15,7 +15,7 @@ public class ExcelFactory extends WorkbookFactory {
      * @param sheetNames
      * @return
      */
-    public static HSSFWorkbook getExcel(String[] sheetNames) {
+    public static HSSFWorkbook createWorkbook(String[] sheetNames) {
         HSSFWorkbook wb = new HSSFWorkbook();
         for (String sheetName : sheetNames) {
             wb.createSheet(sheetName);
@@ -23,7 +23,7 @@ public class ExcelFactory extends WorkbookFactory {
         return wb;
     }
 
-    public static SheetProcessor getSheetProcessor(HSSFSheet sheet) {
+    public static SheetProcessor createSheetProcessor(HSSFSheet sheet) {
         return new SheetProcessor(sheet);
     }
 

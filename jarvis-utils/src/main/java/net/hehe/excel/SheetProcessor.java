@@ -140,8 +140,8 @@ public class SheetProcessor {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         String sheetName = "sheet1";
-        HSSFWorkbook workbook = ExcelFactory.getExcel(new String[]{sheetName});
-        SheetProcessor sheetProcessor = new SheetProcessor(workbook.getSheet(sheetName));
+        HSSFWorkbook workbook = ExcelFactory.createWorkbook(new String[]{sheetName});
+        SheetProcessor sheetProcessor = ExcelFactory.createSheetProcessor(workbook.getSheetAt(0));
         sheetProcessor.insertSimpleRow(1, new String[]{"111", "222", "333"});
         sheetProcessor.insertDropdown(new String[]{"aa", "vv", "ss"}, 1, 1, 5);
         try {

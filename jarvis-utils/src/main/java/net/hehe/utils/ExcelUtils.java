@@ -1,22 +1,41 @@
 package net.hehe.utils;
 
-import com.alibaba.fastjson.JSONObject;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
+import org.apache.poi.ss.usermodel.Cell;
 
-import java.io.File;
-import java.io.InputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-/**
- * @Author neo·tao
- * @Date 2017/12/1
- * @Desc
- */
-public interface ExcelUtils {
-    /**
-     * get data from excel, and parse data to json
-     *
-     * @param fileStream
-     * @return
-     */
-    JSONObject getJsonData(HSSFWorkbook fileStream);
+public class ExcelUtils {
+    public static String getValue(Cell hssfCell) {
+        String result = "";
+        HSSFDataFormatter dataFormatter = new HSSFDataFormatter();
+        if (hssfCell == null) {
+            return result;
+        }
+        switch (hssfCell.getCellType()) {
+            case Cell.CELL_TYPE_BOOLEAN:
+                result = replaceBlank(String.valueOf(hssfCell.getBooleanCellValue()));
+                break;
+            case Cell.CELL_TYPE_NUMERIC:
+                result = replaceBlank(dataFormatter.formatCellValue(hssfCell));
+                break;
+            case Cell.CELL_TYPE_STRING:
+                result = replaceBlank(String.valueOf(hssfCell.getStringCellValue()));
+                break;
+            case Cell.CELL_TYPE_ERROR:
+                break;
+        }
+        return result;
+    }
+
+    static String replaceBlank(String str) {
+        String dest = "";
+        if (str != null) {
+            Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+            Matcher m = p.matcher(str);
+            dest = m.replaceAll("");
+        }
+        return dest;
+    }
 }

@@ -2,6 +2,7 @@ package net.hehe.excel;
 
 import net.hehe.exceptions.ExcelException;
 import net.hehe.utils.ExcelUtils;
+import net.hehe.validate.RuleListValidator;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -18,7 +19,7 @@ import java.util.List;
  * @Date 2017/12/18
  * @Desc
  */
-public class SheetProcessor {
+public class SheetProcessor{
     private HSSFSheet sheet;
 
     SheetProcessor(HSSFSheet sheet) {
@@ -156,7 +157,7 @@ public class SheetProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+new RuleListValidator();
     }
 
 }

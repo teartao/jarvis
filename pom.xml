@@ -31,14 +31,14 @@
 
     <distributionManagement>
         <repository>
-            <id>release_user</id>
-            <name>user of release</name>
-            <url>http://192.168.0.120:8081/nexus/content/repositories/releases</url>
+            <id>releases</id>
+            <name>Releases</name>
+            <url>http://171.16.46.6:8081/nexus/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
-            <id>release_user</id>
-            <name>user of snapshot</name>
-            <url>http://192.168.0.120:8081/nexus/content/repositories/snapshots/</url>
+            <id>snapshots</id>
+            <name>Snapshots</name>
+            <url>http://171.16.46.6:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
